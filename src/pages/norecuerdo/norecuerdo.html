@@ -1,0 +1,21 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>No recuerdo mis datos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <h2>Por favor, envíenme un correo con mis datos...</h2>
+
+  <ion-item>
+    <ion-label>Mi correo</ion-label>
+    <ion-input type="text" name="email" [(ngModel)]="email" required></ion-input>
+  </ion-item>
+
+  <button (click)="enviarCorreo(email)" ion-button block color="light" class="marginTop" >Enviar correo</button>
+
+</ion-content>

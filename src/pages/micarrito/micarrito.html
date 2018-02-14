@@ -1,0 +1,43 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mi carrito</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+
+      <button *ngIf=" totalCarrito > 0 " (click)="ponerPedido()" ion-button block color="light" class="marginTop" >Total del Pedido: $ {{ totalCarrito }}</button>
+
+      <ion-item-sliding  *ngFor="let producto of carrito">
+        
+        <ion-item>
+
+          <ion-avatar item-start>
+              <img src="{{ url }}:{{ puerto }}/images/{{producto.imagen}}">
+          </ion-avatar>
+
+          <div>
+            <h2>{{ producto.codigo }}</h2>
+            <h2>
+              Precio: ${{ producto.precio }} x {{ producto.cantidad }} = ${{ producto.precio * producto.cantidad }}
+            </h2>
+          </div>
+
+        </ion-item>
+
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="quitarDelPedido(producto.codigo)"><ion-icon name="trash"></ion-icon>
+              Borrar
+            </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </ion-list>
+
+  </ion-content>
