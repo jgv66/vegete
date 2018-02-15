@@ -1,14 +1,30 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Mi kiosko</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <h2>Bienvenido, esta es nuestra selección para tí</h2>
+
+  <ion-list>
+    <ion-item *ngFor="let producto of productos" (click)="getDetalleProducto( producto )">
+      
+      <ion-avatar item-start>
+        <img src="{{ url }}:{{ puerto }}/images/{{producto.imagen}}">
+      </ion-avatar>
+
+      <div>
+          <h2>{{ producto.nombre }}</h2>
+          <p>
+            Precio: ${{ producto.precio }}
+            <ion-badge *ngIf=" producto.stock <= 0 "                                            color="danger"  item-end>SIN STOCK</ion-badge>
+            <ion-badge *ngIf=" producto.stock >  0 && producto.stock <  producto.stockcritico " color="primary" item-end>Stock: {{ producto.stock }} {{ producto.unidad }}</ion-badge>
+            <ion-badge *ngIf=" producto.stock >= producto.stockcritico "                        color="light"   item-end>Stock: {{ producto.stock }} {{ producto.unidad }}</ion-badge>
+          </p>
+      </div>
+     
+    </ion-item>
+  </ion-list>
+  
 </ion-content>

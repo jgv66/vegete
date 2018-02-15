@@ -1,0 +1,29 @@
+
+<ion-content padding class="background">
+
+    <ion-list>
+
+        <h2>Datos para ingresar a mi kiosko...</h2>
+
+        <ion-item>
+            <ion-label floating>Mi nombre de usuario</ion-label>
+            <ion-input type="text" name="usuario" [(ngModel)]="usuario" required></ion-input>
+        </ion-item>
+                
+        <ion-item>
+            <ion-label floating>Mi clave de ingreso</ion-label>
+            <ion-input type="password" [(ngModel)]="clave" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+                <ion-label>Recuerda mis datos</ion-label>
+                <ion-checkbox  [(ngModel)]="recordarme" ></ion-checkbox>
+        </ion-item>
+            
+        <button (click)="login(usuario,clave)" ion-button block color="light" class="marginTop" >Ingresar</button>
+        <button (click)="noRecuerdo()"         ion-button block clear>No recuerdo mis datos</button>
+        <button (click)="logout()"             ion-button block clear>Salir</button>
+        
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,35 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Datos del producto</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="totalDelPedido()">
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <div class="producto">
+    <img src="{{ url }}:{{ puerto }}/images/{{ producto.imagen }}" alt="">
+    <h1>{{ producto.nombre }}</h1>
+  </div>
+
+  <ion-list >
+    <ion-item >
+      Precio: ${{ producto.precio }} ( x {{ producto.unidad }} )
+    </ion-item>
+    <ion-item >
+      Stock: {{ producto.stock }}
+    </ion-item>
+  </ion-list>
+
+  <button *ngIf=" producto.stock > 0 " (click)="poneEnCarro(producto.codigo,producto.unidadminima,producto.precio)" ion-button block color="light" class="marginTop" >Agregar a mi carro</button>
+
+  <div  text-justify>
+    <p>{{ producto.descripcion }}</p>
+  </div>  
+
+</ion-content>

@@ -1,0 +1,47 @@
+
+<ion-header>
+    <ion-navbar>
+      <ion-title>Registrar mis datos...</ion-title>
+    </ion-navbar>
+</ion-header>
+  
+<ion-content padding class="background">
+
+    <ion-list>
+
+      <ion-item>
+          <ion-label floating>Mi usuario (con esta ingresa al kiosko)</ion-label>
+          <ion-input type="text" name="usuario" [(ngModel)]="usr.usuario" required></ion-input>
+      </ion-item>
+                
+      <ion-item>
+          <ion-label floating>Mi clave de ingreso</ion-label>
+          <ion-input type="text" name="clave" [(ngModel)]="usr.clave" required></ion-input>
+      </ion-item>
+          
+      <ion-item>
+          <ion-label floating>Nombre y Apellido</ion-label>
+          <ion-input type="text" name="nombre" [(ngModel)]="usr.nombre" required></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-label floating>Dirección</ion-label>
+          <ion-input type="text" name="direccion" [(ngModel)]="usr.direccion" required></ion-input>
+      </ion-item>
+        
+      <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" name="email" [(ngModel)]="usr.email" required></ion-input>
+      </ion-item>
+        
+      <ion-item>
+          <ion-label floating>Teléfono</ion-label>
+          <ion-input type="text" name="telefono" [(ngModel)]="usr.telefono" required></ion-input>
+      </ion-item>
+            
+      <button (click)="registrarUsuario(usr)" ion-button block color="energy">Grabar mis datos e ingresar</button>
+      <button (click)="logout()"              ion-button block clear>Salir sin guardar</button>
+
+      </ion-list>
+
+</ion-content>
