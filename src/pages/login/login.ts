@@ -19,7 +19,7 @@ export class LoginPage {
   private usuario:    string;
   private clave:      string;
   private recordarme: boolean = true;
-  public misCompras:  number = 5;
+  public misCompras:  number = 0;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -31,8 +31,7 @@ export class LoginPage {
   ionViewWillEnter() 
     {
       this.baseLocal.obtenUltimoUsuario()
-        .then( (pUsuario) => 
-        {
+        .then( pUsuario => {
           this.usuario    = pUsuario[0].usuario;
           this.clave      = pUsuario[0].clave;
           this.recordarme = pUsuario[0].recordarme;
@@ -40,9 +39,13 @@ export class LoginPage {
         .catch( err => console.log( 'lectura de usuario con error->', err ) );
     }
 
-  logout() { this.navCtrl.pop() }
+  logout() { 
+    this.navCtrl.pop(); 
+  }
 
-  noRecuerdo() { this.navCtrl.push( NorecuerdoPage ) }
+  noRecuerdo() { 
+    this.navCtrl.push( NorecuerdoPage );
+  }
 
   login( usuario, clave, recordarme ) { 
     this.funciones.cargaEspera();
@@ -50,17 +53,17 @@ export class LoginPage {
         .subscribe( data => { this.funciones.descargaEspera(); this.revisaExitooFracaso( data ); },
                     err  => { this.funciones.descargaEspera(); this.funciones.msgAlert( "ATENCION" , 'Ocurrió un error -> '+err ); }
                   )           
-    }
+  }
   
-    private revisaExitooFracaso( data )
-    { 
-      if ( data.length==0 )
-            this.funciones.msgAlert('ATENCION','El usuario o su clave o ambos podrían estar incorrectos');
-      else
-          { this.funciones.msgAlert('Bienvenido !','Hola '+data[0].nombre );
-            this.baseLocal.guardaUltimoUsuario( data );
-            this.navCtrl.push( TabsPage, data[0], {animate:false} );
-          } 
-    }
+  private revisaExitooFracaso( data )
+  { 
+    if ( data.length==0 )
+          this.funciones.msgAlert('ATENCION','El usuario o su clave o ambos podrían estar incorrectos');
+    else
+        { this.funciones.msgAlert('Bienvenido !','Hola '+data[0].nombre );
+          this.baseLocal.guardaUltimoUsuario( data );
+          this.navCtrl.push( TabsPage, data[0], {animate:false} );
+        } 
+  }
 
 }

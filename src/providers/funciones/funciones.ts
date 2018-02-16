@@ -6,12 +6,16 @@ export class FuncionesProvider {
 
   private loader:     any;
   public  misCompras: number = 0;
-  public  miCarrito:  Array<{codigo: string, cantidad: number, precio: number}>;
+  public  miCarrito:  Array<{codigo: string, cantidad: number, precio: number, imagen: string}>;
 
   constructor( public loadingCtrl: LoadingController,
                public alertCtrl: AlertController ) {
-      this.miCarrito  = [{ codigo:'', cantidad:0, precio:0 }];
-      this.misCompras = 0;
+      this.initCarro();           
+  }
+
+  initCarro() {
+    this.miCarrito  = [{ codigo:'', cantidad:0, precio:0, imagen:'' }];
+    this.misCompras = 0;
   }
 
   cargaEspera() {
@@ -35,30 +39,6 @@ export class FuncionesProvider {
     alert.present();
   }
 
-  msgYesNo( titulo, mensaje, textoSi, textoNo, cCodigo ) {
-    let confirm = this.alertCtrl.create({
-      title:   titulo,
-      message: mensaje,
-        buttons: [
-            {
-              text: textoSi,
-              handler: () => {
-                console.log( textoSi );
-                this.quitarDelCarro( cCodigo );
-                return true;
-              }
-            },
-            {
-              text: textoNo,
-              handler: () => {
-                console.log( textoNo );
-              }
-            }
-          ]
-        });
-        confirm.present();
-  }
-
   cuantasComprasTengo() {
     if ( this.aunVacioElCarrito() ) {
         this.misCompras = 0;
@@ -68,24 +48,27 @@ export class FuncionesProvider {
     return this.misCompras;
   }
 
-  agregarACarro( pcodigo, pcantidad, pprecio ){
+  agregarACarro( producto ){
     if ( this.aunVacioElCarrito() ) {
-        this.miCarrito[0].codigo   = pcodigo;
-        this.miCarrito[0].cantidad = pcantidad;
-        this.miCarrito[0].precio   = pprecio;
+        this.miCarrito[0].codigo   = producto.codigo;
+        this.miCarrito[0].cantidad = producto.unidadminima;
+        this.miCarrito[0].precio   = producto.precio;
+        this.miCarrito[0].imagen   = producto.imagen;
     } else {
-        this.miCarrito.push({ codigo: pcodigo, cantidad: pcantidad, precio: pprecio });
+        this.miCarrito.push({ codigo:   producto.codigo, 
+                              cantidad: producto.unidadminima, 
+                              precio:   producto.precio, 
+                              imagen:   producto.imagen });
     }
     this.misCompras = this.miCarrito.length ;
   }
   
   sumaCarrito() {
-    let totalCarrito = 0;
+    let tot = 0;
     this.miCarrito.forEach( p => {
-      totalCarrito += p.cantidad * p.precio;
+      tot += p.cantidad * p.precio;
     });
-    console.log('totalCarrito',totalCarrito);
-    return totalCarrito;
+    return tot;
   }
 
   private aunVacioElCarrito() {
@@ -93,7 +76,7 @@ export class FuncionesProvider {
   }
 
   quitarDelCarro( pcodigo ) {
-    if ( this.aunVacioElCarrito()!=true ) {
+    if ( !this.aunVacioElCarrito() ) {
          for (var i = 0; i < this.miCarrito.length; i++) {
            if ( this.miCarrito[i].codigo == pcodigo ) {         
                 this.miCarrito.splice(i, 1);
@@ -102,10 +85,10 @@ export class FuncionesProvider {
          }
     };
     if ( this.miCarrito.length == 0 ) {
-         this.miCarrito.push({ codigo: '', cantidad: 0, precio: 0 });
+         this.initCarro();
     }
     this.misCompras = this.miCarrito.length;
   }
-  
-  
+
+
 }

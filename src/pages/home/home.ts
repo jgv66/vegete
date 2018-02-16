@@ -43,16 +43,15 @@ export class HomePage {
 
   private revisaExitooFracaso( data ) { 
     if ( data.length==0 ) {
-        this.funciones.msgAlert('ATENCION','La lista de productos aun no está disponible. Intente luego.');
+        this.funciones.msgAlert('ATENCION','La lista de productos aún no está disponible. Intente luego.');
     } else if ( data.length>0 ) {
         this.productos = data;
     } else {
-        this.funciones.msgAlert('ATENCION','Ocurrió un error al intentar rescatar la lista de productos ->' ); 
+        this.funciones.msgAlert('ATENCION','Ocurrió un error al intentar rescatar la lista de productos' ); 
     }
   }
 
   getDetalleProducto( producto: Productos ) {
-      console.log( 'producto', producto );
       this.navCtrl.push( DetallePage, { producto: producto } );
   }
 }

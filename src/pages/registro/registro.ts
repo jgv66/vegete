@@ -1,9 +1,8 @@
 import { BaseLocalProvider } from './../../providers/base-local/base-local';
 import { Component } from '@angular/core';
-import { IonicPage, NavController  } from 'ionic-angular';
+import { IonicPage, NavController, App  } from 'ionic-angular';
 import { NetworkengineProvider } from '../../providers/networkengine/networkengine';
 import { Usuario } from '../../model/usuario.model';
-import { TabsPage } from '../tabs/tabs';
 import { FuncionesProvider } from '../../providers/funciones/funciones';
 
 @IonicPage()
@@ -15,10 +14,11 @@ export class RegistroPage {
 
   public usr: Usuario ;
 
-  constructor(public navCtrl:     NavController, 
-              public netWork:     NetworkengineProvider,
-              public funciones:   FuncionesProvider,
-              public baseLocal:   BaseLocalProvider ) {
+  constructor(public navCtrl:   NavController, 
+              public netWork:   NetworkengineProvider,
+              public funciones: FuncionesProvider,
+              public baseLocal: BaseLocalProvider,
+              private app:      App ) {
      this.usr = { usuario:'',clave:'',recordarme:false};
   }
   
@@ -40,10 +40,13 @@ export class RegistroPage {
         this.funciones.msgAlert('ATENCION','Los datos ingresados podrían estar incorrectos')
     } else { 
       try { 
-        if ( data.resultado == 'ok' ) {
-            this.funciones.msgAlert('Bienvenido !','Hola '+usr.nombre );
-            this.baseLocal.guardaUltimoUsuario( usr );
-            this.navCtrl.push( TabsPage, usr, {animate:false} );
+        // ok= mssql, affected..= mysql
+        if ( data.resultado == 'ok' || data.affectedRows == 1 ) {
+            this.funciones.msgAlert('Hola '+usr.nombre.trim(),'Gracias por registrarte. Ahora ingresa con tus datos para acceder a la lista de compras' );
+            //this.baseLocal.guardaUltimoUsuario( usr ); 
+            //this.navCtrl.push( TabsPage, usr, {animate:false} );
+            const root = this.app.getRootNav();
+            root.popToRoot();
         } else {
           this.revisaError(data);
         }
@@ -55,7 +58,8 @@ export class RegistroPage {
   }
 
   revisaError( data ) {
-    if ( data.mensaje.indexOf('constraint') || data.mensaje.indexOf('Duplicate entry') ) { 
+    // constraint= mssql, Duplicate entry= mysql
+    if ( data.mensaje.indexOf('constraint') || data.mensaje.indexOf('Duplicate') ) { 
       this.funciones.msgAlert('ATENCION','El nombre de usuario ya existe, cambie y reintente' ); 
     } 
     else { 

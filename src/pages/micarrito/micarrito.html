@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mi carrito</ion-title>
+    <ion-title>Mi carrito de compras</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,7 +11,7 @@
 
     <ion-list>
 
-      <button *ngIf=" totalCarrito > 0 " (click)="ponerPedido()" ion-button block color="light" class="marginTop" >Total del Pedido: $ {{ totalCarrito }}</button>
+      <button *ngIf=" totalCarrito > 0 " ion-button block color="light" class="marginTop" >Total del Pedido: $ {{ sumaCarrito() }}</button>
 
       <ion-item-sliding  *ngFor="let producto of carrito">
         
@@ -35,8 +35,10 @@
               Borrar
             </button>
         </ion-item-options>
-
+        
       </ion-item-sliding>
+
+      <button *ngIf=" totalCarrito > 0 " (click)="enviarPedido()" ion-button block color="light" class="marginTop" >Enviar nuestro pedido</button>
 
     </ion-list>
 

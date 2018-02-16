@@ -17,7 +17,7 @@ export class BaseLocalProvider
 
     obtenUltimoUsuario() {
     return this.storage.get('ultimoUsuario')
-      .then((pUsuario) => { 
+      .then( pUsuario => { 
           this.user = pUsuario == null ? {} : pUsuario;
           return this.user;
       });
@@ -29,16 +29,15 @@ export class BaseLocalProvider
     }
 
     obtenUltimoPedido() {
-          try {
-                return this.storage.get('ultimoPedido')
-                .then((pPedido) => { 
-                    this.pedido = pPedido == null ? {} : pPedido;
-                    return this.pedido;
-                  });
-          } catch( error ) {
-            console.log( 'error en obtenUltimoPedido()',error );
-            this.pedido = [{ codigo:'', cantidad:0, precio:0 }];
-            return this.pedido;
-          };
-      }
+      try {
+          return this.storage.get('ultimoPedido')
+          .then( pPedido => { 
+                 this.pedido = pPedido == null ? {} : pPedido;
+                 return this.pedido;
+          });
+      } catch( error ) {
+        this.pedido = [{ codigo:'', cantidad:0, precio:0 }];
+        return this.pedido;
+      };
+    }
 }

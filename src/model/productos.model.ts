@@ -119,8 +119,10 @@ CREATE TABLE usuarios(
   PRIMARY KEY  (`usuario`));
 create index usuarios1 on usuarios (email);
 
+--unsigned not null auto_increment primary key
+
 CREATE TABLE pedidos_enca (
-	id_pedido int NOT NULL AUTO_INCREMENT,
+	id_pedido int NOT NULL AUTO_INCREMENT,   
 	id_empresa int NOT NULL default 1,
 	usuario varchar(50) NOT NULL,
 	fechapedido DateTime NOT NULL,

@@ -26,7 +26,7 @@
     </ion-item>
   </ion-list>
 
-  <button *ngIf=" producto.stock > 0 " (click)="poneEnCarro(producto.codigo,producto.unidadminima,producto.precio)" ion-button block color="light" class="marginTop" >Agregar a mi carro</button>
+  <button *ngIf=" producto.stock > 0 " (click)="poneEnCarro(producto)" ion-button block color="light" class="marginTop" >Agregar a mi carro</button>
 
   <div  text-justify>
     <p>{{ producto.descripcion }}</p>

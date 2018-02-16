@@ -31,8 +31,8 @@ export class DetallePage {
     /*console.log('ionViewDidLoad DetallePage');*/
   }
 
-  poneEnCarro( codigo, cantidad, precio ) {
-    this.funciones.agregarACarro( codigo, cantidad, precio );
+  poneEnCarro( producto ) {
+    this.funciones.agregarACarro( producto );
   }
 
   totalDelPedido() {

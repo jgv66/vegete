@@ -46,4 +46,14 @@ export class NetworkengineProvider {
     return this.http.post( url, body ).map( res => res.json() );
   }
 
+  enviarPedidoAlServidor( pUsuario: string, pCarrito: string ) {
+
+    console.log( pUsuario, pCarrito);
+
+    let accion = "/detalle"; 
+    let url    = this.url +":"+ this.puerto + accion;
+    let body   = { usuario: pUsuario, transaccion: pCarrito };
+    return this.http.post( url, body ).map( res => res.json() );
+  }
+
 }
