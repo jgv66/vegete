@@ -46,14 +46,20 @@ export class NetworkengineProvider {
     return this.http.post( url, body ).map( res => res.json() );
   }
 
-  enviarPedidoAlServidor( pUsuario: string, pCarrito: string ) {
-
-    console.log( pUsuario, pCarrito);
-
-    let accion = "/detalle"; 
+  enviarPedidoAlServidor( nEmpresa: number, pUsuario: string, pCarrito: string ) {
+    console.log(nEmpresa, pUsuario, pCarrito);
+    let accion = "/pedido"; 
     let url    = this.url +":"+ this.puerto + accion;
-    let body   = { usuario: pUsuario, transaccion: pCarrito };
+    let body   = { empresa: nEmpresa, usuario: pUsuario, transaccion: pCarrito };
     return this.http.post( url, body ).map( res => res.json() );
   }
+
+  eliminaPedidoDelServidor( id_pedido: number ) {
+    let accion = "/xpedidox"; 
+    let url    = this.url +":"+ this.puerto + accion;
+    let body   = { id_pedido: id_pedido };
+    return this.http.post( url, body ).map( res => res.json() );
+  }
+  
 
 }

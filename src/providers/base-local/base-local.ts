@@ -5,13 +5,13 @@ import { Usuario } from './../../model/usuario.model';
 @Injectable()
 export class BaseLocalProvider 
 {
-    private user:      Usuario;
-    private pedido:    Array<{codigo: string, cantidad: number, precio: number}> = [{ codigo:'', cantidad:0, precio:0 }];
+    public  user:   Usuario;
+    private pedido: Array<{codigo: string, cantidad: number, precio: number}> = [{ codigo:'', cantidad:0, precio:0 }];
     
     constructor ( private storage: Storage ) {}
 
     guardaUltimoUsuario( usuario ) {
-      this.user = usuario;
+      this.user = usuario; 
       this.storage.set('ultimoUsuario',this.user);
     }
 

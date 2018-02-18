@@ -34,7 +34,6 @@ export class HomePage {
 
   cargaProductos() {
       this.funciones.cargaEspera();
-      // llamada al api para rescatar los productos
       this.netWork.traeUnaLista( 'productos', 'codigo' )
           .subscribe( data => { this.funciones.descargaEspera(); this.revisaExitooFracaso( data ); },
                       err  => { this.funciones.descargaEspera(); this.funciones.msgAlert( 'ATENCION' ,err );  }

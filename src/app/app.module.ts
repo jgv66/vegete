@@ -21,6 +21,7 @@ import { NetworkengineProvider } from '../providers/networkengine/networkengine'
 import { BaseLocalProvider } from '../providers/base-local/base-local';
 import { FuncionesProvider } from '../providers/funciones/funciones';
 import { ContactPage } from '../pages/contact/contact';
+import { MisPedidosPage } from '../pages/mis-pedidos/mis-pedidos';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ContactPage } from '../pages/contact/contact';
     ContactPage,
     LogoutPage,
     DetallePage,
-    MicarritoPage
+    MicarritoPage,
+    MisPedidosPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { ContactPage } from '../pages/contact/contact';
     ContactPage,
     LogoutPage,
     DetallePage,
-    MicarritoPage
+    MicarritoPage,
+    MisPedidosPage
   ],
   providers: [
     StatusBar,

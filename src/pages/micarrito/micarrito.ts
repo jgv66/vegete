@@ -23,10 +23,11 @@ import { FuncionesProvider } from '../../providers/funciones/funciones';
 })
 export class MicarritoPage {
 
-  private usuario:  any;
+  private cod_usr:  any;
   private carrito:  any;
   private url:      any;
   private puerto:   any;
+  private empresa:  number;
   totalCarrito:     number;
 
   constructor( public navCtrl:   NavController,
@@ -41,13 +42,8 @@ export class MicarritoPage {
       this.puerto  = this.netWork.puerto;
       // valor toital del pedido
       this.totalCarrito = 0;
-
-      // datos del usuario
-      this.baselocal.obtenUltimoUsuario()
-        .then( pUsuario => {
-          this.usuario = pUsuario[0].usuario;
-        })
-        .catch( err => console.log( 'lectura de usuario con error->', err ) );
+      this.cod_usr      = this.baselocal.user[0].usuario ;
+      this.empresa      = 1;
   }
 
   ionViewWillEnter() {
@@ -90,8 +86,9 @@ export class MicarritoPage {
   }
 
   enviarPedido() {
+    console.log('enviarPedido()',this.cod_usr);
     this.funciones.cargaEspera();
-    this.netWork.enviarPedidoAlServidor( this.usuario, this.carrito )
+    this.netWork.enviarPedidoAlServidor( this.empresa, this.cod_usr, this.carrito )
         .subscribe( data => { this.funciones.descargaEspera(); this.revisaExitooFracaso( data ); },
                     err  => { this.funciones.descargaEspera(); this.funciones.msgAlert( "ATENCION" , 'Ocurrió un error -> '+err ); }
       )           
@@ -104,7 +101,7 @@ export class MicarritoPage {
       try { 
         // ok= mssql, affected..= mysql
         if ( data.resultado == 'ok' ) {
-            this.funciones.msgAlert('ATENCION','Su Nro. de pedido es el '+data.numero+'. Ya ha llegado al vendedor. Una copia será despachada a su correo para verificación.' );
+            this.funciones.msgAlert('PEDIDO Nro.'+data.numero,'Su Nro. de pedido es el '+data.numero+'. Ya ha llegado al vendedor. Una copia será despachada a su correo para verificación. Gracias por utilizar nuestro carro de compras.' );
             this.funciones.initCarro();
             const root = this.app.getRootNav();
             root.popToRoot();

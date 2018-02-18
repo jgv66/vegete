@@ -1,0 +1,46 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Mis pedidos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item-sliding  *ngFor="let pedido of pedidos">
+      
+      <ion-item>
+
+        <div>
+            <h2>Nro. de pedido: {{ pedido.id_pedido }} - Monto: ${{ pedido.montopedido | number:0 }}</h2>
+            <p>Fecha: {{ pedido.fechapedido }} Hora: {{ pedido.horapedido }}</p>
+            <ion-grid>
+                <ion-row>
+                  <ion-col col-3><ion-badge item-end>Itemes: {{ pedido.itemes }}</ion-badge></ion-col>
+                  <ion-col col-3><ion-badge item-end>Piezas: {{ pedido.piezas }}</ion-badge></ion-col>
+                  <ion-col col-4><ion-badge item-end color="danger">Peso: {{ pedido.pesototal }} kg.</ion-badge></ion-col>
+                  <ion-col col-2>
+                      <ion-badge item-end *ngIf=" pedido.despachado=='SI' && pedido.rechazado=='NO' "><ion-icon name="thumbs-up">  </ion-icon></ion-badge>
+                      <ion-badge item-end *ngIf=" pedido.despachado=='NO' && pedido.rechazado=='NO' "><ion-icon name="timer">      </ion-icon></ion-badge>
+                      <ion-badge item-end *ngIf=" pedido.rechazado=='SI'                            "><ion-icon name="thumbs-down"></ion-icon></ion-badge>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+      </ion-item>
+
+      <ion-item-options side="left">
+          <button ion-button color="light" (click)="verPedido( pedido.id_pedido )"><ion-icon name="eye"></ion-icon>Ver</button>
+      </ion-item-options>
+      <ion-item-options side="right">
+          <button ion-button color="danger" (click)="quitarPedido( pedido.id_pedido )"><ion-icon name="trash"></ion-icon>Borrar</button>
+      </ion-item-options>
+      
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>

@@ -1,6 +1,7 @@
 <ion-tabs selectedIndex="0">
-  <ion-tab [root]="tab1Root" [rootParams]="data" tabTitle="Productos" tabIcon="home"></ion-tab>  
-  <ion-tab [root]="tab2Root" [rootParams]="data" tabTitle="Mi carro"  tabIcon="cart" [tabBadge]="cuantasComprasTengo()" tabBadgeStyle="danger"></ion-tab>
-  <ion-tab [root]="tab3Root" [rootParams]="data" tabTitle="Contacto"  tabIcon="contacts"></ion-tab>
-  <ion-tab [root]="tab4Root" [rootParams]="data" tabTitle="Salir"     tabIcon="log-out"></ion-tab>
+  <ion-tab [root]="tab1Root" [rootParams]="data" tabTitle="Productos"   tabIcon="home"></ion-tab>  
+  <ion-tab [root]="tab2Root" [rootParams]="data" tabTitle="Mi carro"    tabIcon="cart" [tabBadge]="cuantasComprasTengo()" tabBadgeStyle="danger"></ion-tab>
+  <ion-tab [root]="tab3Root" [rootParams]="data" tabTitle="Mis Pedidos" tabIcon="basket"></ion-tab>
+  <ion-tab [root]="tab4Root" [rootParams]="data" tabTitle="Contacto"    tabIcon="contacts"></ion-tab>
+  <ion-tab [root]="tab5Root" [rootParams]="data" tabTitle="Salir"       tabIcon="log-out"></ion-tab>
 </ion-tabs>

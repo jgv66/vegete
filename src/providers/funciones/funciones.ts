@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
+import { NetworkengineProvider } from '../networkengine/networkengine';
 
 @Injectable()
 export class FuncionesProvider {
@@ -8,8 +9,9 @@ export class FuncionesProvider {
   public  misCompras: number = 0;
   public  miCarrito:  Array<{codigo: string, cantidad: number, precio: number, imagen: string}>;
 
-  constructor( public loadingCtrl: LoadingController,
-               public alertCtrl: AlertController ) {
+  constructor( public loadingCtrl:  LoadingController,
+               public alertCtrl:    AlertController,
+               public netWork:      NetworkengineProvider ) {
       this.initCarro();           
   }
 
@@ -90,5 +92,7 @@ export class FuncionesProvider {
     this.misCompras = this.miCarrito.length;
   }
 
-
+  eliminarPedido( id_pedido ) {
+    this.netWork.eliminaPedidoDelServidor(id_pedido)
+  }
 }
